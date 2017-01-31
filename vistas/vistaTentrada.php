@@ -72,7 +72,7 @@ function cargar()
 	<td>Codigo Articulo</td>
 	<td>Descripcion Art.</td>
 	<td>Unidad de Medida</td>
-	<td>Cantidad</td>
+	<td>Cant. Recp</td>
 	<td>-</td>
 </tr>
 <tr>

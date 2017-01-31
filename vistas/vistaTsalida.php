@@ -44,28 +44,52 @@ function cargar()
 <tr >
 <td align='right'><span class='rojo'>*</span> Nro. Despacho:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtcodigo' value='<?php print($lcCodigo);?>' id='txtcodigo' class='validate[required]'/></td>
-</tr>
-<tr>
 <td align='right'><span class='rojo'>*</span> Fecha Despacho:</td>
 <td><input type='text' disabled='disabled' name='txtfecha_salida' value='<?php print($lcFecha_salida);?>' id='txtfecha_salida' class=' fecha_formateada'/></td>
 </tr>
 <tr>
+<td align='right'><span class='rojo'>*</span> Unidad:</td>
+<td><select name='txtunidad' disabled='disabled' id='txtunidad' class='validate[required]'><option value=''>Seleccione</option></select></td>
 <td align='right'><span class='rojo'>*</span> Trabajador:</td>
 <td><select name='txtcedula_personal' disabled='disabled' id='txtcedula_personal' class='validate[required]'><option value=''>Seleccione</option></select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Nro Solicitud:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtnro_solicitud' value='<?php print($lcNro_solicitud);?>' id='txtnro_solicitud' class='validate[required]'/></td>
-</tr>
-<tr>
 <td align='right'><span class='rojo'>*</span> Fecha Solicitud:</td>
 <td><input type='text' disabled='disabled' name='txtfecha_solicitud' value='<?php print($lcFecha_solicitud);?>' id='txtfecha_solicitud' class='validate[required] fecha_formateada'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Observación:</td>
-<td><textarea name='txtobservacion' maxlength='' disabled='disabled' id='txtobservacion' class='validate[required]'><?php print($lcObservacion);?></textarea></td>
+<td colspan="3"><textarea name='txtobservacion' maxlength='' disabled='disabled' id='txtobservacion' class='validate[required]'><?php print($lcObservacion);?></textarea></td>
 </tr>
-
+</table>
+</div>
+<div class='cont_frame'>
+<h1>Detalle</h1>
+<table border='1' class='datos' align='center'>
+<tr>
+	<td>Codigo Articulo</td>
+	<td>Descripcion Art.</td>
+	<td>Unidad de Medida</td>
+	<td>Cant. Desp</td>
+	<td>-</td>
+</tr>
+<tr>
+	<td>
+	<select>
+		<option value="" disabled="disabled">Seleccione</option>	
+	</select>
+	</td>
+	<td><textarea  disabled="disabled"></textarea></td>
+	<td>
+		<select>
+			<option value="" disabled="disabled">Seleccione</option>	
+		</select>
+	</td>
+	<td><input type="text"  disabled="disabled" size="5"/></td>
+	<td><button type="button"  disabled="disabled">+</button></td>
+</tr>
 <input type='hidden' name='txtoperacion' value='des'>
 <input type='hidden' name='txtvar_tem' value='<?php print($lcCodigo); ?>'>
 </table>
