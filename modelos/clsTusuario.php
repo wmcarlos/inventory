@@ -8,8 +8,6 @@ private $acPregunta;
 private $acRespuesta;
 private $estatus;
 private $nombre_completo;
-private $correo;
-private $id_pais;
 private $url_avatar;
 
 //constructor de la clase		
@@ -21,8 +19,6 @@ $this->acPregunta = "";
 $this->acRespuesta = "";
 $this->estatus = "";
 $this->nombre_completo ="";
-$this->correo = "";
-$this->id_pais = "";
 $this->url_avatar = "";
 }
 
@@ -117,7 +113,7 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
-return $this->ejecutar("insert into tusuario(nombre_usu,clave,tipo,pregunta,respuesta,estatus,nombre_completo,correo,id_pais,url_avatar)values('$this->acNombre_usu','$this->acClave','$this->acTipo','$this->acPregunta','$this->acRespuesta','$this->estatus','$this->nombre_completo','$this->correo','$this->id_pais','$this->url_avatar')");
+return $this->ejecutar("insert into tusuario(nombre_usu,clave,tipo,pregunta,respuesta,estatus,nombre_completo,correo)values('$this->acNombre_usu','$this->acClave','$this->acTipo','$this->acPregunta','$this->acRespuesta','$this->estatus','$this->nombre_completo','$this->correo')");
 }
 public function reiniciar_contador($user){
 	return $this->ejecutar("update tusuario set intentos = 0 where nombre_usu = '$user'");
@@ -126,7 +122,7 @@ public function reiniciar_contador($user){
 //funcion modificar
 public function modificar($lcVarTem)
 {
-return $this->ejecutar("update tusuario set nombre_usu = '$this->acNombre_usu', clave = '$this->acClave', tipo = '$this->acTipo', pregunta = '$this->acPregunta', respuesta = '$this->acRespuesta', estatus = '$this->estatus', nombre_completo = '$this->nombre_completo', correo = '$this->correo', id_pais = '$this->id_pais', url_avatar = '$this->url_avatar' where(nombre_usu = '$this->acNombre_usu')");
+return $this->ejecutar("update tusuario set nombre_usu = '$this->acNombre_usu', clave = '$this->acClave', tipo = '$this->acTipo', pregunta = '$this->acPregunta', respuesta = '$this->acRespuesta', estatus = '$this->estatus', nombre_completo = '$this->nombre_completo', correo = '$this->correo' where(nombre_usu = '$this->acNombre_usu')");
 }
 
 public function incrementar_intentos($usuario, $inten){

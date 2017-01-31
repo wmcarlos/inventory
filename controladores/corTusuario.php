@@ -11,8 +11,6 @@ $lobjTusuario->acRespuesta=$_POST['txtrespuesta'];
 $lobjTusuario->estatus = $_POST['txtestatus'];
 $lobjTusuario->nombre_completo = $_POST["txtnombre_completo"];
 $lobjTusuario->correo = $_POST["txtcorreo"];
-$lobjTusuario->id_pais = $_POST["txtid_pais"];
-$lobjTusuario->url_avatar = $_POST["txturl_avatar"];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
@@ -73,8 +71,6 @@ switch($lcOperacion){
 			$estatus = $lobjTusuario->estatus;
 			$nombre_completo = $lobjTusuario->nombre_completo;
 			$correo = $lobjTusuario->correo;
-			$id_pais = $lobjTusuario->id_pais;
-			$url_avatar = $lobjTusuario->url_avatar;
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
