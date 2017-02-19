@@ -4,7 +4,7 @@ class clsDatos
    private $lbCon,$result;
    protected function conectar()
    {
-	  $this->lbCon=mysql_connect("localhost","root","");
+	  $this->lbCon=mysql_connect("localhost","root","123456");
 	  mysql_select_db("inventory",$this->lbCon);
    }
 
