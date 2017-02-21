@@ -56,6 +56,21 @@ $llEnc=true;
 return $llEnc;
 }
 
+public function listar(){
+	$cad = "";
+	$this->ejecutar("select * from tarticulo order by nombre asc");
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row["nombre"]."</td>";
+			$cad.="<td>".$row["descripcion"]."</td>";
+			$cad.="<td>".$row["min"]."</td>";
+			$cad.="<td>".$row["max"]."</td>";
+			$cad.="<td>".$row["existencia"]."</td>";
+		$cad.="</tr>";
+	}
+	return $cad;
+}
+
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {

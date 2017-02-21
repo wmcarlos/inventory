@@ -9,5 +9,10 @@
                 </p>
    </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('a [href*="vistaReporte_de_inventario.php"]').attr("target","_blank");
+  });
+</script>
 </body>
 </html>
