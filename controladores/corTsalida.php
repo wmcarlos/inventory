@@ -12,6 +12,12 @@ $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
 
+$lista_prod = $lobjTsalida->listar_productos();
+
+//Arreglos
+$articulos = $_POST["articulos"];
+$cantidades = $_POST["cantidades"];
+
 switch($lcOperacion){
 
 	case "incluir":
@@ -21,6 +27,10 @@ switch($lcOperacion){
 		}else{
 			$lcListo = 1;
 			$lobjTsalida->incluir();  
+			for($i=0;$i<count($articulos);$i++){
+				$lobjTsalida->incluir_detalle($articulos[$i], $cantidades[$i]);
+				$lobjTsalida->resinventory($articulos[$i], $cantidades[$i]);
+			}
 		}
 	
 	break;
@@ -29,12 +39,13 @@ switch($lcOperacion){
 	
 		if($lobjTsalida->buscar()){
 			$lcCodigo=$lobjTsalida->acCodigo;
-$lcFecha_salida=$lobjTsalida->acFecha_salida;
-$lcCedula_personal=$lobjTsalida->acCedula_personal;
-$lcNro_solicitud=$lobjTsalida->acNro_solicitud;
-$lcFecha_solicitud=$lobjTsalida->acFecha_solicitud;
-$lcObservacion=$lobjTsalida->acObservacion; 
-$unidad = $lobjTsalida->unidad;
+			$lcFecha_salida=$lobjTsalida->acFecha_salida;
+			$lcCedula_personal=$lobjTsalida->acCedula_personal;
+			$lcNro_solicitud=$lobjTsalida->acNro_solicitud;
+			$lcFecha_solicitud=$lobjTsalida->acFecha_solicitud;
+			$lcObservacion=$lobjTsalida->acObservacion; 
+			$unidad = $lobjTsalida->unidad;
+			$caddespacho = $lobjTsalida->listar_detalles();
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
@@ -44,10 +55,12 @@ $unidad = $lobjTsalida->unidad;
 	
 	case "modificar":
 	
-		if($lobjTsalida->modificar($lcVarTem)>=1){
+		$lobjTsalida->modificar($lcVarTem);
 		$lcListo = 1;
-		}else{
-		$lcListo = 0;
+		$lobjTsalida->deleteline();
+		for($i=0;$i<count($articulos);$i++){
+			$lobjTsalida->incluir_detalle($articulos[$i], $cantidades[$i]);
+			$lobjTsalida->resinventory($articulos[$i], $cantidades[$i]);
 		}
 	
 	break;

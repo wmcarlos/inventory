@@ -37,6 +37,7 @@ $this->ejecutar("
 	date_format(ts.fecha_salida, '%d/%m/%Y') as fecha_salida,
 	ts.codigo as codigo,
 	ts.cedula_personal as cedula_personal,
+	ts.nro_solicitud,
 	ts.observacion,
 	tun.codigo as unidad 
 	from tsalida as ts
@@ -91,6 +92,29 @@ $llEnc=$llEnc."<tr>
 return $inicio.$llEnc.$final;
 }
 
+public function incluir_detalle($producto, $cantidad){
+	return $this->ejecutar("insert into tlinea_salida (codigo_salida,codigo_articulo,cantidad)
+	 values ($this->acCodigo,$producto,$cantidad)");
+}
+
+public function listar_productos(){
+	$cad = '';
+	$this->ejecutar("
+		select 
+			ta.codigo as codigo,
+			ta.nombre as articulo,
+			tum.nombre as unidad_medida
+		from 
+		tarticulo as ta
+		inner join tuniad_medida as tum on (tum.codigo = ta.codigo_unidad_medida)
+		order by ta.nombre asc");
+	while($laRow=$this->arreglo())
+	{			
+		$cad.='"'.$laRow["codigo"].'-'.$laRow["articulo"].'-'.$laRow["unidad_medida"].'",';
+	}
+	return $cad;
+} 
+
 //funcion inlcuir
 public function incluir()
 {
@@ -101,8 +125,44 @@ public function incluir()
 
 return $this->ejecutar("insert into tsalida(codigo,fecha_salida,cedula_personal,nro_solicitud,fecha_solicitud,observacion)values('$this->acCodigo','$this->acFecha_salida','$this->acCedula_personal','$this->acNro_solicitud','$this->acFecha_solicitud','$this->acObservacion')");
 }
-        
 
+public function deleteline(){
+	return $this->ejecutar("delete from tlinea_salida where codigo_salida = $this->acCodigo");
+}
+
+public function listar_detalles(){
+	$cad = '';
+	$this->ejecutar("
+		select 
+			le.codigo_articulo,
+			ta.nombre as articulo,
+			tum.nombre as unidad_medida,
+			le.cantidad
+		from tlinea_salida as le
+		inner join tarticulo as ta on (ta.codigo = le.codigo_articulo)
+		inner join tuniad_medida as tum on (ta.codigo_unidad_medida = tum.codigo)
+		where le.codigo_salida = $this->acCodigo");
+	while($laRow=$this->arreglo())
+	{
+		$cad.="<tr>";
+			$cad.="<td><input type='hidden' name='articulos[]' value='".$laRow["codigo_articulo"]."'>".$laRow["articulo"]."</td>";
+			$cad.="<td>".$laRow["unidad_medida"]."</td>";
+			$cad.="<td><input type='hidden' name='cantidades[]' value='".$laRow["cantidad"]."'>".$laRow["cantidad"]."</td>";
+			$cad.="<td><button type='button' onclick='delline(this);'>x</button></td>";
+		$cad.="</tr>";
+	}
+	return $cad;
+}
+
+public function resinventory($producto, $cantidad){
+	$actual = 0;
+	$this->ejecutar("select existencia from tarticulo where codigo = $producto");
+	if($row = $this->arreglo()){
+		$actual = $row["existencia"];
+	}
+	$total = $actual - $cantidad;
+	$this->ejecutar("update tarticulo set existencia = $total where codigo = $producto");
+}
 
 //funcion modificar
 public function modificar($lcVarTem)

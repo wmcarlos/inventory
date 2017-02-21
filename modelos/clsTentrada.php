@@ -100,7 +100,15 @@ public function incluir_detalle($producto, $cantidad){
 	 values ($this->acCodigo,$producto,$cantidad)");
 }
         
-
+public function addinventory($producto, $cantidad){
+	$actual = 0;
+	$this->ejecutar("select existencia from tarticulo where codigo = $producto");
+	if($row = $this->arreglo()){
+		$actual = $row["existencia"];
+	}
+	$total = $actual + $cantidad;
+	$this->ejecutar("update tarticulo set existencia = $total where codigo = $producto");
+}
 
 //funcion modificar
 public function modificar($lcVarTem)

@@ -29,6 +29,7 @@ switch($lcOperacion){
 			$lobjTentrada->incluir();  
 			for($i=0;$i<count($articulos);$i++){
 				$lobjTentrada->incluir_detalle($articulos[$i], $cantidades[$i]);
+				$lobjTentrada->addinventory($articulos[$i], $cantidades[$i]);
 			}
 		}
 	
@@ -56,8 +57,8 @@ switch($lcOperacion){
 		$lobjTentrada->deleteline();
 		for($i=0;$i<count($articulos);$i++){
 			$lobjTentrada->incluir_detalle($articulos[$i], $cantidades[$i]);
+			$lobjTentrada->addinventory($articulos[$i], $cantidades[$i]);
 		}
-
 		$lcListo = 1;
 	break;
 	

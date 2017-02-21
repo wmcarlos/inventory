@@ -85,7 +85,7 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Existencia:</td>
-<td colspan="3"><input type='text' disabled='disabled' maxlength='' name='txtexistencia' value='<?php print($lcExistencia);?>' id='txtexistencia' class='validate[required],custom[integer],min[0]'/></td>
+<td colspan="3"><input type='text' disabled='disabled' readonly="readOnly" maxlength='' name='txtexistencia' value='<?php print($lcExistencia);?>' id='txtexistencia' class='validate[custom[integer],min[0]'/></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
