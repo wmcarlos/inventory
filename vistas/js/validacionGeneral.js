@@ -54,8 +54,8 @@ function Eliminar()
 			location.href='../vistas/vista'+redirec+'.php';	
 		}
 
-function cargar_select(operacion,listo)
-		{
+function cargar_select(operacion,listo){
+
 			var f = document.form1;
 			if(listo==1 && operacion=='buscar')
 			{
@@ -76,38 +76,34 @@ function cargar_select(operacion,listo)
 			}
 }
 
-//Funcion para Agregar Detalles no Importa Cuantos Sean
-function add_column(e,id){
-	var table = document.getElementById(id);
-	var tr = document.createElement("tr");
-	var data_array = e.getAttribute("rel").split(",");
-	var total_data = data_array.length;
-	var cadena = "";
-	var value;
-	var selected;
-	for(var i=0;i<total_data;i++){
-		if(document.getElementById(data_array[i]).getAttribute("is_select")=="si"){
-			selected = document.getElementById(data_array[i]).options[document.getElementById(data_array[i]).selectedIndex].text;
-			value = document.getElementById(data_array[i]).value;
-			cadena = cadena+"<td><input type='hidden' name='"+data_array[i]+"[]' value='"+value+"'/>"+selected+"</td>";
-			document.getElementById(data_array[i]).value = "-";
-		}else{
-			value = document.getElementById(data_array[i]).value;
-			cadena = cadena+"<td><input type='hidden' name='"+data_array[i]+"[]' value='"+value+"'/>"+value+"</td>";
-			document.getElementById(data_array[i]).value = "";
-		}
-	}
-	tr.innerHTML = cadena+"<td><input type='button' value='X' rel='"+id+"' onclick='del_column(this)'/></td>";
-	table.appendChild(tr);
-}
 
-//Eliminar una tupla de tabla sin importar su tamano
-function del_column(e){
-	
-	var table = document.getElementById(e.getAttribute("rel"));
+function delline(e){
 	var td = e.parentNode;
 	var tr = td.parentNode;
-		table.removeChild(tr);
+	var tbody = tr.parentNode;
+	tbody.removeChild(tr);
+}
+
+function addline(){
+	var content = document.getElementById("content-details");
+	var articulo = document.getElementById("txttext_articulo").value.split("-");
+	var unidad_medida = document.getElementById("txtunidad_medida").value;
+	var cantidad = document.getElementById("txtcantidad").value;
+	var text = "";
+	if(document.getElementById("txttext_articulo").value && document.getElementById("txtcantidad").value){
+		text+="<tr>";
+			text+="<td><input type='hidden' name='articulos[]' value='"+articulo[0]+"'>"+articulo[1]+"</td>";
+			text+="<td>"+unidad_medida+"</td>";
+			text+="<td><input type='hidden' name='cantidades[]' value='"+cantidad+"'>"+cantidad+"</td>";
+			text+="<td><button type='button' onclick='delline(this);'>x</button></td>";
+		text+="</tr>";
+		document.getElementById("txttext_articulo").value = "";
+		document.getElementById("txtunidad_medida").value = "";
+		document.getElementById("txtcantidad").value = "";
+		content.innerHTML+=text;
+	}else{
+		alert("Debes seleccionar un Articulo con su Cantidad");
+	}
 }
 
 $(function() {

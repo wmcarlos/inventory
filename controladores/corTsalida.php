@@ -34,6 +34,7 @@ $lcCedula_personal=$lobjTsalida->acCedula_personal;
 $lcNro_solicitud=$lobjTsalida->acNro_solicitud;
 $lcFecha_solicitud=$lobjTsalida->acFecha_solicitud;
 $lcObservacion=$lobjTsalida->acObservacion; 
+$unidad = $lobjTsalida->unidad;
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;

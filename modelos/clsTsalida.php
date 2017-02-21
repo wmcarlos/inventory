@@ -7,6 +7,7 @@ private $acCedula_personal;
 private $acNro_solicitud;
 private $acFecha_solicitud;
 private $acObservacion;
+private $unidad;
 
 //constructor de la clase		
 public function __construct(){
@@ -16,6 +17,7 @@ $this->acCedula_personal = "";
 $this->acNro_solicitud = "";
 $this->acFecha_solicitud = "";
 $this->acObservacion = "";
+$this->unidad = "";
 }
 
 //metodo magico set
@@ -29,15 +31,27 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from tsalida where(codigo = '$this->acCodigo')");
+$this->ejecutar("
+	select 
+	date_format(ts.fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, 
+	date_format(ts.fecha_salida, '%d/%m/%Y') as fecha_salida,
+	ts.codigo as codigo,
+	ts.cedula_personal as cedula_personal,
+	ts.observacion,
+	tun.codigo as unidad 
+	from tsalida as ts
+	inner join tpersonal as tp on (tp.cedula = ts.cedula_personal)
+	inner join tunidad as tun on (tun.codigo = tp.codigo_unidad)
+	where(ts.codigo = '$this->acCodigo')");
 if($laRow=$this->arreglo())
 {		
-$this->acCodigo=$laRow['codigo'];
-$this->acFecha_salida=$laRow['fecha_salida'];
-$this->acCedula_personal=$laRow['cedula_personal'];
-$this->acNro_solicitud=$laRow['nro_solicitud'];
-$this->acFecha_solicitud=$laRow['fecha_solicitud'];
-$this->acObservacion=$laRow['observacion'];		
+	$this->acCodigo=$laRow['codigo'];
+	$this->acFecha_salida=$laRow['fecha_salida'];
+	$this->acCedula_personal=$laRow['cedula_personal'];
+	$this->acNro_solicitud=$laRow['nro_solicitud'];
+	$this->acFecha_solicitud=$laRow['fecha_solicitud'];
+	$this->acObservacion=$laRow['observacion'];		
+	$this->unidad = $laRow["unidad"];
 $llEnc=true;
 }
 return $llEnc;
@@ -46,7 +60,7 @@ return $llEnc;
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
-$lrTb=$this->ejecutar("select * from tsalida where((codigo like '%$valor%') or (fecha_salida like '%$valor%') or (cedula_personal like '%$valor%') or (nro_solicitud like '%$valor%') or (fecha_solicitud like '%$valor%') or (observacion like '%$valor%'))");
+$lrTb=$this->ejecutar("select *, date_format(fecha_solicitud, '%d/%m/%Y') as fecha_solicitud, date_format(fecha_salida, '%d/%m/%Y') as fecha_salida from tsalida where((codigo like '%$valor%') or (fecha_salida like '%$valor%') or (cedula_personal like '%$valor%') or (nro_solicitud like '%$valor%') or (fecha_solicitud like '%$valor%') or (observacion like '%$valor%'))");
 while($laRow=$this->arreglo())
 {		
 $this->acCodigo=$laRow['codigo'];
@@ -58,23 +72,19 @@ $this->acObservacion=$laRow['observacion'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>codigo</td>
-<td style='font-weight:bold; font-size:20px;'>fecha_salida</td>
-<td style='font-weight:bold; font-size:20px;'>cedula_personal</td>
-<td style='font-weight:bold; font-size:20px;'>nro_solicitud</td>
-<td style='font-weight:bold; font-size:20px;'>fecha_solicitud</td>
-<td style='font-weight:bold; font-size:20px;'>observacion</td>
+			   <td style='font-weight:bold; font-size:20px;'>Nro Salida</td>
+				<td style='font-weight:bold; font-size:20px;'>Fecha Salida</td>
+				<td style='font-weight:bold; font-size:20px;'>Nro solicitud</td>
+				<td style='font-weight:bold; font-size:20px;'>Fecha Solicitud</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
 					<td>".$this->acCodigo."</td>
-<td>".$this->acFecha_salida."</td>
-<td>".$this->acCedula_personal."</td>
-<td>".$this->acNro_solicitud."</td>
-<td>".$this->acFecha_solicitud."</td>
-<td>".$this->acObservacion."</td>
+					<td>".$this->acFecha_salida."</td>
+					<td>".$this->acNro_solicitud."</td>
+					<td>".$this->acFecha_solicitud."</td>
 					<td><a href='?txtcodigo=".$laRow['codigo']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }
@@ -84,6 +94,11 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
+	$fecsal = explode("/",$this->acFecha_salida);
+	$fecsol = explode("/", $this->acFecha_solicitud);
+	$this->acFecha_salida = $fecsal[2]."/".$fecsal[1]."/".$fecsal[0];
+	$this->acFecha_solicitud = $fecsol[2]."/".$fecsol[1]."/".$fecsol[0];
+
 return $this->ejecutar("insert into tsalida(codigo,fecha_salida,cedula_personal,nro_solicitud,fecha_solicitud,observacion)values('$this->acCodigo','$this->acFecha_salida','$this->acCedula_personal','$this->acNro_solicitud','$this->acFecha_solicitud','$this->acObservacion')");
 }
         
@@ -92,6 +107,10 @@ return $this->ejecutar("insert into tsalida(codigo,fecha_salida,cedula_personal,
 //funcion modificar
 public function modificar($lcVarTem)
 {
+	$fecsal = explode("/",$this->acFecha_salida);
+	$fecsol = explode("/", $this->acFecha_solicitud);
+	$this->acFecha_salida = $fecsal[2]."/".$fecsal[1]."/".$fecsal[0];
+	$this->acFecha_solicitud = $fecsol[2]."/".$fecsol[1]."/".$fecsol[0];
 return $this->ejecutar("update tsalida set codigo = '$this->acCodigo', fecha_salida = '$this->acFecha_salida', cedula_personal = '$this->acCedula_personal', nro_solicitud = '$this->acNro_solicitud', fecha_solicitud = '$this->acFecha_solicitud', observacion = '$this->acObservacion' where(codigo = '$this->acCodigo')");
 }
  

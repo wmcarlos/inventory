@@ -24,6 +24,9 @@ print($obj->busqueda_ajax($datos));
 		case "listar_modelos":
 			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tmodelo","codigo","nombre","codigo_marca",$datos,"");
 		break;
+		case "listar_personal":
+			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tpersonal","cedula","concat(nombres,' ',appellidos)","codigo_unidad",$datos,"");
+		break;
 	}	
 }
 ?>

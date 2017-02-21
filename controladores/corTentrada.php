@@ -12,6 +12,11 @@ $lobjTentrada->acFecha_entrada=$_POST['txtfecha_entrada'];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
+$lista_prod = $lobjTentrada->listar_productos();
+
+//Arreglos
+$articulos = $_POST["articulos"];
+$cantidades = $_POST["cantidades"];
 
 switch($lcOperacion){
 
@@ -22,20 +27,23 @@ switch($lcOperacion){
 		}else{
 			$lcListo = 1;
 			$lobjTentrada->incluir();  
+			for($i=0;$i<count($articulos);$i++){
+				$lobjTentrada->incluir_detalle($articulos[$i], $cantidades[$i]);
+			}
 		}
 	
 	break;
 	
 	case "buscar":
-	
 		if($lobjTentrada->buscar()){
 			$lcCodigo=$lobjTentrada->acCodigo;
-$lcRif_proveedor=$lobjTentrada->acRif_proveedor;
-$lcNro_factura=$lobjTentrada->acNro_factura;
-$lcFecha_factura=$lobjTentrada->acFecha_factura;
-$lcObservacion=$lobjTentrada->acObservacion;
-$lcCodigo_partida=$lobjTentrada->acCodigo_partida;
-$lcFecha_entrada=$lobjTentrada->acFecha_entrada; 
+			$lcRif_proveedor=$lobjTentrada->acRif_proveedor;
+			$lcNro_factura=$lobjTentrada->acNro_factura;
+			$lcFecha_factura=$lobjTentrada->acFecha_factura;
+			$lcObservacion=$lobjTentrada->acObservacion;
+			$lcCodigo_partida=$lobjTentrada->acCodigo_partida;
+			$lcFecha_entrada=$lobjTentrada->acFecha_entrada;
+			$cadrecepcion = $lobjTentrada->listar_detalles();
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
@@ -44,13 +52,13 @@ $lcFecha_entrada=$lobjTentrada->acFecha_entrada;
 	break;
 	
 	case "modificar":
-	
-		if($lobjTentrada->modificar($lcVarTem)>=1){
-		$lcListo = 1;
-		}else{
-		$lcListo = 0;
+		$lobjTentrada->modificar($lcVarTem);
+		$lobjTentrada->deleteline();
+		for($i=0;$i<count($articulos);$i++){
+			$lobjTentrada->incluir_detalle($articulos[$i], $cantidades[$i]);
 		}
-	
+
+		$lcListo = 1;
 	break;
 	
 	case "eliminar":

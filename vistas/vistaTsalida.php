@@ -7,6 +7,8 @@ $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
 $id = 'no';
+}else{
+	$combo_personal = "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tpersonal","cedula","concat(nombres,' ',appellidos)","codigo_unidad",$unidad,$lcCedula_personal);
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -48,10 +50,17 @@ function cargar()
 <td><input type='text' disabled='disabled' name='txtfecha_salida' value='<?php print($lcFecha_salida);?>' id='txtfecha_salida' class=' fecha_formateada'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Unidad:</td>
-<td><select name='txtunidad' disabled='disabled' id='txtunidad' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td align='right'><span class='rojo'>*</span> Departamento:</td>
+<td>
+	<select name='txtunidad' disabled='disabled' operacion="listar_personal" load_data="txtcedula_personal" id='txtunidad' class='validate[required] select_change'>
+	<option value=''>Seleccione</option>
+	<?php print $objFunciones->crear_combo("tunidad","codigo","nombre",$unidad);?>
+	</select></td>
 <td align='right'><span class='rojo'>*</span> Trabajador:</td>
-<td><select name='txtcedula_personal' disabled='disabled' id='txtcedula_personal' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select name='txtcedula_personal' disabled='disabled' id='txtcedula_personal' class='validate[required]'>
+<option value=''>Seleccione</option>
+<?php print $combo_personal; ?>
+</select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Nro Solicitud:</td>

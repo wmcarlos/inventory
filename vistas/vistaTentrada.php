@@ -49,7 +49,10 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Proveedor:</td>
-<td><select name='txtrif_proveedor' disabled='disabled' id='txtrif_proveedor' class=''><option value=''>Seleccione</option></select></td>
+<td><select name='txtrif_proveedor' disabled='disabled' id='txtrif_proveedor' class=''>
+<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo("tproveedor","rif","razon_social",$lcRif_proveedor); ?>
+</select></td>
 <td align='right'><span class='rojo'>*</span> Nro. Factura:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtnro_factura' value='<?php print($lcNro_factura);?>' id='txtnro_factura' class='validate[required]'/></td>
 </tr>
@@ -61,7 +64,10 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Partida:</td>
-<td colspan="3"><select name='txtcodigo_partida' disabled='disabled' id='txtcodigo_partida' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td colspan="3"><select name='txtcodigo_partida' disabled='disabled' id='txtcodigo_partida' class='validate[required]'>
+<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo("tpartida","codigo","nombre",$lcCodigo_partida); ?>
+</select></td>
 </tr>
 </table>
 </div>
@@ -69,27 +75,25 @@ function cargar()
 <h1>Detalle</h1>
 <table border='1' class='datos' align='center'>
 <tr>
-	<td>Codigo Articulo</td>
-	<td>Descripcion Art.</td>
+	<td>Articulo</td>
 	<td>Unidad de Medida</td>
 	<td>Cant. Recp</td>
 	<td>-</td>
 </tr>
 <tr>
 	<td>
-	<select>
-		<option value="" disabled="disabled">Seleccione</option>	
-	</select>
+	<input type="hidden" disabled="disabled" id="txtcodigo_articulo" name="txtcodigo_articulo">
+	<input type="text" disabled="disabled" id="txttext_articulo" name="txttext_articulo">
 	</td>
-	<td><textarea  disabled="disabled"></textarea></td>
 	<td>
-		<select>
-			<option value="" disabled="disabled">Seleccione</option>	
-		</select>
+		<input type="text" disabled="disabled" name="txtunidad_medida" readonly="readonly" id="txtunidad_medida"/>
 	</td>
-	<td><input type="text"  disabled="disabled" size="5"/></td>
-	<td><button type="button"  disabled="disabled">+</button></td>
+	<td><input type="text" name="txtcantidad" disabled="disabled" id="txtcantidad" size="5"/></td>
+	<td><button type="button" onclick="addline();">+</button></td>
 </tr>
+<tbody id="content-details">
+	<?php print $cadrecepcion; ?>
+</tbody>
 <input type='hidden' name='txtoperacion' value='des'>
 <input type='hidden' name='txtvar_tem' value='<?php print($lcCodigo); ?>'>
 </table>
@@ -103,5 +107,24 @@ function cargar()
 	despues_form.php
 -->
 <?php @include('despues_form.php'); ?>
+<script type="text/javascript">
+	$(document).ready(function(){
+    var availableTags = [
+    	<?php  print $lista_prod; ?>
+    ]
+    $( "#txttext_articulo" ).autocomplete({
+      source: availableTags,
+      select: function( event , ui ) {
+            var data = ui.item.label.split("-");
+            var cod = data[0];
+            var text = data[1];
+            var um = data[2];
+            $("#txtcodigo_articulo").val(cod);
+            $("#txttext_articulo").val(text);
+            $("#txtunidad_medida").val(um);
+        }
+    });
+	});
+</script>
 </body>
 </html>
