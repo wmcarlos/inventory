@@ -112,14 +112,15 @@ public function listar_productos(){
 		select 
 			ta.codigo as codigo,
 			ta.nombre as articulo,
-			tum.nombre as unidad_medida
+			tum.nombre as unidad_medida,
+			ta.existencia
 		from 
 		tarticulo as ta
 		inner join tuniad_medida as tum on (tum.codigo = ta.codigo_unidad_medida)
 		order by ta.nombre asc");
 	while($laRow=$this->arreglo())
 	{			
-		$cad.='"'.$laRow["codigo"].'-'.$laRow["articulo"].'-'.$laRow["unidad_medida"].'",';
+		$cad.='"'.$laRow["codigo"].'-'.$laRow["articulo"].'-'.$laRow["unidad_medida"].'-'.$laRow["existencia"].'",';
 	}
 	return $cad;
 } 

@@ -77,6 +77,7 @@ function cargar()
 <tr>
 	<td>Articulo</td>
 	<td>Unidad de Medida</td>
+	<td>Existencia</td>
 	<td>Cant. Recp</td>
 	<td>-</td>
 </tr>
@@ -87,6 +88,9 @@ function cargar()
 	</td>
 	<td>
 		<input type="text" disabled="disabled" name="txtunidad_medida" readonly="readonly" id="txtunidad_medida"/>
+	</td>
+	<td>
+		<input type="text" disabled="disabled" name="txtexistencia" readonly="readonly" id="txtexistencia"/>
 	</td>
 	<td><input type="text" name="txtcantidad" disabled="disabled" id="txtcantidad" size="5"/></td>
 	<td><button type="button" onclick="addline();">+</button></td>
@@ -119,9 +123,12 @@ function cargar()
             var cod = data[0];
             var text = data[1];
             var um = data[2];
+            var ex = data[3];
             $("#txtcodigo_articulo").val(cod);
             $("#txttext_articulo").val(text);
             $("#txtunidad_medida").val(um);
+            $("#txtexistencia").val(ex);
+            $("#txtcantidad").focus();
         }
     });
 	});
