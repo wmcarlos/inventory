@@ -46,7 +46,7 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Nro. Despacho:</td>
 <td><input type='text' disabled='disabled' size="3" readonly="readOnly" maxlength='' name='txtcodigo' value='<?php print($lcCodigo);?>' id='txtcodigo' class='validate[required]'/></td>
 <td align='right'><span class='rojo'>*</span> Fecha Despacho:</td>
-<td><input type='text' disabled='disabled' name='txtfecha_salida' value='<?php print($lcFecha_salida);?>' id='txtfecha_salida' class=' fecha_formateada'/></td>
+<td><input type='text' disabled='disabled' name='txtfecha_salida' value='<?php print($lcFecha_salida);?>' id='txtfecha_salida' class='range_formateada'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Departamento:</td>
@@ -65,7 +65,7 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Nro Solicitud:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtnro_solicitud' value='<?php print($lcNro_solicitud);?>' id='txtnro_solicitud' class='validate[required]'/></td>
 <td align='right'><span class='rojo'>*</span> Fecha Solicitud:</td>
-<td><input type='text' disabled='disabled' name='txtfecha_solicitud' value='<?php print($lcFecha_solicitud);?>' id='txtfecha_solicitud' class='validate[required] fecha_formateada'/></td>
+<td><input type='text' disabled='disabled' name='txtfecha_solicitud' value='<?php print($lcFecha_solicitud);?>' id='txtfecha_solicitud' class='validate[required] range_formateada'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Observación:</td>

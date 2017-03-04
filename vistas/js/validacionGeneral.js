@@ -141,3 +141,13 @@ $(function() {
 		changeYear : true
 	});
 });
+
+$(function() {
+	$( ".range_formateada" ).datepicker({
+		dateFormat : 'dd/mm/yy',
+		changeMonth : true,
+		changeYear : true,
+		minDate : '-4D',
+		maxDate : '+0D'
+	});
+});

@@ -45,7 +45,7 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Nro. Recepción:</td>
 <td><input type='text' disabled='disabled' size="3" readonly="readOnly" maxlength='' name='txtcodigo' value='<?php print($lcCodigo);?>' id='txtcodigo' class='validate[required]'/></td>
 <td align='right'><span class='rojo'>*</span> Fecha Recepcion:</td>
-<td><input type='text' disabled='disabled' name='txtfecha_entrada' value='<?php print($lcFecha_entrada);?>' id='txtfecha_entrada' class='validate[required] fecha_formateada'/></td>
+<td><input type='text' disabled='disabled' name='txtfecha_entrada' value='<?php print($lcFecha_entrada);?>' id='txtfecha_entrada' class='validate[required] range_formateada'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Proveedor:</td>
@@ -58,7 +58,7 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Fecha Factura:</td>
-<td><input type='text' disabled='disabled' name='txtfecha_factura' value='<?php print($lcFecha_factura);?>' id='txtfecha_factura' class='validate[required] fecha_formateada'/></td>
+<td><input type='text' disabled='disabled' name='txtfecha_factura' value='<?php print($lcFecha_factura);?>' id='txtfecha_factura' class='validate[required] range_formateada'/></td>
 <td align='right'><span class='rojo'>*</span> Observación:</td>
 <td><textarea name='txtobservacion' maxlength='' disabled='disabled' id='txtobservacion' class='validate[required]'><?php print($lcObservacion);?></textarea></td>
 </tr>
