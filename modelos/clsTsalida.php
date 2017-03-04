@@ -166,6 +166,31 @@ public function listar_detalles(){
 	return $cad;
 }
 
+public function listar_detalles_for_report($id){
+	$cad = '';
+	$this->ejecutar("
+		select 
+			le.codigo_articulo,
+			ta.nombre as articulo,
+			tum.nombre as unidad_medida,
+			le.cantidad,
+			ta.existencia
+		from tlinea_salida as le
+		inner join tarticulo as ta on (ta.codigo = le.codigo_articulo)
+		inner join tuniad_medida as tum on (ta.codigo_unidad_medida = tum.codigo)
+		where le.codigo_salida = $id");
+	while($laRow=$this->arreglo())
+	{
+		$cad.="<tr>";
+			$cad.="<td>".$laRow["articulo"]."</td>";
+			$cad.="<td>".$laRow["unidad_medida"]."</td>";
+			$cad.="<td>".$laRow["existencia"]."</td>";
+			$cad.="<td>".$laRow["cantidad"]."</td>";
+		$cad.="</tr>";
+	}
+	return $cad;
+}
+
 public function resinventory($producto, $cantidad){
 	$actual = 0;
 	$this->ejecutar("select existencia from tarticulo where codigo = $producto");

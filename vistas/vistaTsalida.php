@@ -8,6 +8,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
 $id = $lcCodigo;
 }else{
+	$enlace = "<a href='#' target='_blank' style='float:right; margin-right:20px; text-decoration:none;' id='reporte'>Imprimir Despacho</a>";
 	$combo_personal = "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tpersonal","cedula","concat(nombres,' ',appellidos)","codigo_unidad",$unidad,$lcCedula_personal);
 }
 ?>
@@ -40,7 +41,7 @@ function cargar()
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-<h1>Despacho</h1>
+<h1>Despacho <?php print $enlace; ?></h1>
 <table border='1' class='datos' align='center'>
 <tr >
 <td align='right'><span class='rojo'>*</span> Nro. Despacho:</td>
@@ -115,25 +116,49 @@ function cargar()
 <?php @include('despues_form.php'); ?>
 <script type="text/javascript">
 	$(document).ready(function(){
-    var availableTags = [
-    	<?php  print $lista_prod; ?>
-    ]
-    $( "#txttext_articulo" ).autocomplete({
-      source: availableTags,
-      select: function( event , ui ) {
-            var data = ui.item.label.split("-");
-            var cod = data[0];
-            var text = data[1];
-            var um = data[2];
-            var ex = data[3];
-            $("#txtcodigo_articulo").val(cod);
-            $("#txttext_articulo").val(text);
-            $("#txtunidad_medida").val(um);
-            $("#txtexistencia").val(ex);
-            $("#txtcantidad").focus();
-        }
-    });
+
+
+	    var availableTags = [
+	    	<?php  print $lista_prod; ?>
+	    ]
+
+	    $( "#txttext_articulo" ).autocomplete({
+	      source: availableTags,
+	      select: function( event , ui ) {
+	            var data = ui.item.label.split("-");
+	            var cod = data[0];
+	            var text = data[1];
+	            var um = data[2];
+	            var ex = data[3];
+	            $("#txtcodigo_articulo").val(cod);
+	            $("#txttext_articulo").val(text);
+	            $("#txtunidad_medida").val(um);
+	            $("#txtexistencia").val(ex);
+	            $("#txtcantidad").focus();
+	        }
+	    });
+
+	    var operation = "<?php print $_GET['txtoperacion']; ?>";
+
+	    if(operation == "buscar"){
+	    	var nro_despacho = document.getElementById("txtcodigo").value;
+	    	var fecha_despacho = document.getElementById("txtfecha_salida").value;
+	    	var departamento = document.getElementById("txtunidad").options[document.getElementById("txtunidad").selectedIndex].text;
+	    	var empleado = document.getElementById("txtcedula_personal").options[document.getElementById("txtcedula_personal").selectedIndex].text;
+	    	var nro_solicitud = document.getElementById("txtnro_solicitud").value;
+	    	var fecha_solicitud = document.getElementById("txtfecha_solicitud").value;
+	    	var observacion = document.getElementById("txtobservacion").value;
+
+	    	var link = "reporte_despacho.php?nro_despacho="+nro_despacho+"&fecha_despacho="+fecha_despacho+"&departamento="+departamento+"&trabajador="+empleado+"&nro_solicitud="+nro_solicitud+"&fecha_solicitud="+fecha_solicitud+"&observacion="+observacion;
+	    	
+	    	document.getElementById("reporte").setAttribute("href",link);
+	    }
+
+
 	});
+
+
+
 </script>
 </body>
 </html>
