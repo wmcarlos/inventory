@@ -39,7 +39,7 @@ function cargar()
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-<h1>Unidad</h1>
+<h1>Departamento</h1>
 <table border='1' class='datos' align='center'>
 <tr style='display:none;'>
 <td align='right'><span class='rojo'>*</span> codigo:</td>
@@ -50,12 +50,12 @@ function cargar()
 <td><input type='text' disabled='disabled' maxlength='' name='txtnombre' value='<?php print($lcNombre);?>' id='txtnombre' class='validate[required],custom[onlyLetterSp]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Correo:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
+<td align='right'>Correo:</td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[custom[email]]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Telefono:</td>
-<td><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[required],custom[integer],maxSize[11],minSize[11]'/></td>
+<td align='right'>Telefono:</td>
+<td><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[custom[integer],maxSize[11],minSize[11]]'/></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
