@@ -13,6 +13,7 @@ $lcOperacion=$_REQUEST["txtoperacion"];
 
 
 $lista_prod = $lobjTsalida->listar_productos();
+$lcCodigo = $lobjTsalida->lastnro();
 
 //Arreglos
 $articulos = $_POST["articulos"];

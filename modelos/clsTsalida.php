@@ -58,6 +58,15 @@ $llEnc=true;
 return $llEnc;
 }
 
+public function lastnro(){
+	$nro = 0;
+	$this->ejecutar("select codigo from tsalida order by codigo desc limit 1");
+	if($row = $this->arreglo()){
+		$nro = $row['codigo'] + 1;
+	}
+	return $nro;
+}
+
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {

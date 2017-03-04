@@ -22,12 +22,12 @@
          <span id="fecha">Domingo, 10 de Noviembre del 2012</span>
   				<p class="parrafo">
   					<div class="cuadro">
-                <h1 class="titulo2">Nueva Contrase&ntilde;a</h1>
+                <h1 class="titulo2">Nueva Clave</h1>
                   <p>
                       <table>
                           <form name="fentrar" action="../controladores/corTusuario.php" method="post">
                             <tr>
-                                <td>Nueva Contrase&ntilde;a</td>
+                                <td>Nueva Clave:</td>
                                   <td> <input type="password" name="txtnueva_contra" size="15" /></td>
                               </tr>
                                <tr>

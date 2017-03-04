@@ -43,7 +43,7 @@
 								<td colspan="2" align="center"><input type="submit" name="btn_entrar" value="ENTRAR" /><input type="hidden" name="txtoperacion" value="ingresar" /></td>
                             </tr>
                             <tr>
-								<td colspan="2" align="center"><a href="vistas/comprobar_usuario.php">¿Olvidaste Tu Contraseña?</a></td>
+								<td colspan="2" align="center"><a href="vistas/comprobar_usuario.php">¿Olvidaste Tu Clave?</a></td>
                             </tr>
                             <input type="hidden" name='txtoperacion' value='entrar'/>
                             </form>

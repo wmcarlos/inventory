@@ -110,6 +110,15 @@ public function addinventory($producto, $cantidad){
 	$this->ejecutar("update tarticulo set existencia = $total where codigo = $producto");
 }
 
+public function getlastnro(){
+	$nro = 0;
+	$this->ejecutar("select codigo from tentrada order by codigo desc limit 1");
+	if($row = $this->arreglo()){
+		$nro = $row["codigo"] + 1;
+	}
+	return $nro;
+}
+
 //funcion modificar
 public function modificar($lcVarTem)
 {

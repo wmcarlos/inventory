@@ -36,7 +36,7 @@
 		table#customers tr td, table#customers thead th{
 			border: 1px solid #ccc;
 			text-align: center;
-			padding:5px;
+			padding:2px;
 		}
 	</style>
 </head>

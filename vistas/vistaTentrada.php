@@ -6,7 +6,7 @@ $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-$id = 'no';
+$id = $lcCodigo;
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -43,7 +43,7 @@ function cargar()
 <table border='1' class='datos' align='center'>
 <tr >
 <td align='right'><span class='rojo'>*</span> Nro. Recepción:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtcodigo' value='<?php print($lcCodigo);?>' id='txtcodigo' class='validate[required]'/></td>
+<td><input type='text' disabled='disabled' size="3" readonly="readOnly" maxlength='' name='txtcodigo' value='<?php print($lcCodigo);?>' id='txtcodigo' class='validate[required]'/></td>
 <td align='right'><span class='rojo'>*</span> Fecha Recepcion:</td>
 <td><input type='text' disabled='disabled' name='txtfecha_entrada' value='<?php print($lcFecha_entrada);?>' id='txtfecha_entrada' class='validate[required] fecha_formateada'/></td>
 </tr>
