@@ -64,6 +64,7 @@
 </div>
 </body>
 </html>
+
 <script type="text/javascript">
 mostrar_mensaje = function(){
   <?php
