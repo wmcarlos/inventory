@@ -64,10 +64,10 @@ function cargar()
 <td><input type='text' disabled='disabled' name='txtfecha_nacimiento' value='<?php print($lcFecha_nacimiento);?>' id='txtfecha_nacimiento' class='validate[required] fecha_formateada'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Correo:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
-<td align='right'><span class='rojo'>*</span> Telefono:</td>
-<td><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[required],custom[integer],maxSize[11],minSize[11]'/></td>
+<td align='right'>Correo:</td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[custom[email]]'/></td>
+<td align='right'>Telefono:</td>
+<td><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[custom[integer],maxSize[11],minSize[11]]'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Estado:</td>

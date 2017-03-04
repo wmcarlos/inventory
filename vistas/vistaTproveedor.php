@@ -78,12 +78,12 @@ function cargar()
 <tr>
 <td align='right'><span class='rojo'>*</span> Direccion:</td>
 <td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
-<td align='right'><span class='rojo'>*</span> Correo:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
+<td align='right'>Correo:</td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[custom[email]]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Telefono:</td>
-<td colspan="3"><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[required],custom[integer],maxSize[11],minSize[11]'/></td>
+<td align='right'>Telefono:</td>
+<td colspan="3"><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[custom[integer],maxSize[11],minSize[11]]'/></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
