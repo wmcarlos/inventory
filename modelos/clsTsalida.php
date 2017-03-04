@@ -190,5 +190,33 @@ public function eliminar()
 {
 return $this->ejecutar("delete from tsalida where(codigo = '$this->acCodigo')");
 }
+
+public function listarsalidas(){
+	$this->ejecutar("select 
+		s.codigo as nro_despacho,
+		date_format(s.fecha_salida, '%d/%m/%Y') as fecha_despacho,
+		concat(p.nacionalidad,'-',p.cedula,' ',p.nombres,' ',p.appellidos,' (',u.nombre,')') as personal,
+		a.nombre as articulo,
+		ls.cantidad as cantidad
+		from tlinea_salida as ls
+		inner join tsalida as s on (s.codigo = ls.codigo_salida)
+		inner join tarticulo as a on (a.codigo = ls.codigo_articulo)
+		inner join tpersonal as p on (s.cedula_personal = p.cedula)
+		inner join tunidad as u on (u.codigo = p.codigo_unidad)");
+
+	$cad = "";
+
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row["nro_despacho"]."</td>";
+			$cad.="<td>".$row["fecha_despacho"]."</td>";
+			$cad.="<td>".$row["personal"]."</td>";
+			$cad.="<td>".$row["articulo"]."</td>";
+			$cad.="<td>".$row["cantidad"]."</td>";
+		$cad.="</tr>";
+	}
+
+	return $cad;
+}
 //fin clase
 }?>

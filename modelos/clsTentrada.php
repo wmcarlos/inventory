@@ -183,5 +183,32 @@ public function eliminar()
 {
 return $this->ejecutar("delete from tentrada where(codigo = '$this->acCodigo')");
 }
+
+public function listarentradas(){
+	$this->ejecutar("select 
+			e.codigo as nro_recepcion,
+			date_format(e.fecha_entrada, '%d/%m/%Y') as fecha_recepcion,
+			e.rif_proveedor as rif_proveedor,
+			p.razon_social as nombre_proveedor,
+			a.nombre as producto,
+			le.cantidad
+			from tlinea_entrada as le
+			inner join tentrada as e on (e.codigo = le.codigo_entrada)
+			inner join tarticulo as a on (a.codigo = le.codigo_articulo)
+			inner join tproveedor as p on (p.rif = e.rif_proveedor)
+			order by e.fecha_entrada desc");
+	$cad = "";
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row["nro_recepcion"]."</td>";
+			$cad.="<td>".$row["fecha_recepcion"]."</td>";
+			$cad.="<td>".$row["rif_proveedor"]."</td>";
+			$cad.="<td>".$row["nombre_proveedor"]."</td>";
+			$cad.="<td>".$row["producto"]."</td>";
+			$cad.="<td>".$row["cantidad"]."</td>";
+		$cad.="</tr>";
+	}
+	return $cad;
+}
 //fin clase
 }?>
