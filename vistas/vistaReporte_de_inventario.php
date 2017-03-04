@@ -1,68 +1,54 @@
 <?php 
 	require_once("../modelos/clsTarticulo.php");
+	require_once("../reportes/dompdf/autoload.inc.php");
+	// reference the Dompdf namespace
+	use Dompdf\Dompdf;
+
 	$objar = new clsTarticulo();
 	$cad = $objar->listar();
-?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Reporte de Inventario</title>
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="plugins/tableexport/tableExport.js"></script>
-	<script type="text/javascript" src="plugins/tableexport/jquery.base64.js"></script>
-	<script type="text/javascript" src="plugins/tableexport/jspdf/libs/sprintf.js"></script>
-	<script type="text/javascript" src="plugins/tableexport/jspdf/jspdf.js"></script>
-	<script type="text/javascript" src="plugins/tableexport/jspdf/libs/base64.js"></script>
-	<style type="text/css">
-		div#content{
-			width: 800px;
-			height: auto;
-			overflow: hidden;
-			margin: 5px auto;
-			box-shadow: 5px 5px 10px #ccc;
-		}
+	$dompdf = new Dompdf();
 
-		table#customers{
-			width: 100%;
-			border:1px solid #ccc;
-		}
+	$html = '<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Reporte de Inventario</title>
+		<style type="text/css">
+			table#customers{
+				width: 100%;
+			}
 
-		table#customers thead{
-			background: #ccc;
-			color: black;
-		}
-
-		table#customers tr td, table#customers thead th{
-			border: 1px solid #ccc;
-			text-align: center;
-			padding:2px;
-		}
-	</style>
-</head>
-<body>
-<div id="content">
-	<table id="customers" class="table table-striped" >		
-	<thead>
-		<th colspan="5">Reporte de Inventario</th>
-	</thead>
-	<thead>
-		<th>Nombre</th>
-		<th>Descripcion</th>
-		<th>Minimo</th>
-		<th>Maximo</th>
-		<th>Existencia</th>
-	</thead>
-	<tbody>
-		<?php print $cad; ?>
+			table#customers tr td{
+				border: 1px solid #ccc;
+				text-align: center;
+				padding:2px;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="content">
+	   <img src="img/banner.png" width="723"/>
+	   <center><h3>Lista de Productos en el Inventario</h3></center>
+		<table id="customers">
 		<tr>
-			<td colspan="5">
-				<button type="button" onclick="$('#customers').tableExport({type:'pdf',pdfFontSize:'7',escape:'false'});">Imprimir en PDF</button>
-				<button type="button" onclick="$('#customers').tableExport({type:'excel',escape:'false'});">Imprimir en Excel</button>
-			</td>
+			<td>Nombre</td>
+			<td>Descripcion</td>
+			<td>Minimo</td>
+			<td>Maximo</td>
+			<td>Existencia</td>
 		</tr>
-	</tbody>
-</table> 
-</div>
-</body>
-</html>
+		'.$cad.'
+	</table> 
+	</div>
+	</body>
+	</html>';
+
+	$dompdf->loadHtml($html);
+	// (Optional) Setup the paper size and orientation
+	//$dompdf->setPaper('A', 'landscape');
+	// Render the HTML as PDF
+	$dompdf->render();
+	// Output the generated PDF to Browser
+	$dompdf->stream("lista_de_inventario.pdf", array("Attachment" => false));
+
+	exit(0);
