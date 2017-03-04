@@ -161,7 +161,8 @@ public function listar_detalles(){
 			le.codigo_articulo,
 			ta.nombre as articulo,
 			tum.nombre as unidad_medida,
-			le.cantidad
+			le.cantidad,
+			ta.existencia as existencia
 		from tlinea_entrada as le
 		inner join tarticulo as ta on (ta.codigo = le.codigo_articulo)
 		inner join tuniad_medida as tum on (ta.codigo_unidad_medida = tum.codigo)
@@ -171,6 +172,7 @@ public function listar_detalles(){
 		$cad.="<tr>";
 			$cad.="<td><input type='hidden' name='articulos[]' value='".$laRow["codigo_articulo"]."'>".$laRow["articulo"]."</td>";
 			$cad.="<td>".$laRow["unidad_medida"]."</td>";
+			$cad.="<td>".$laRow["existencia"]."</td>";
 			$cad.="<td><input type='hidden' name='cantidades[]' value='".$laRow["cantidad"]."'>".$laRow["cantidad"]."</td>";
 			$cad.="<td><button type='button' onclick='delline(this);'>x</button></td>";
 		$cad.="</tr>";
