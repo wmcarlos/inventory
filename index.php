@@ -56,9 +56,7 @@
    <!--Pie de Pagina-->
    <div id="pie">
                 <p id="contenido_pie">
-					Calle San Felipe entre avenidas Libertador y Miranda Frente a la Plaza Bolivar Sarare Estado Lara<br />
-					 <a href="#">Codigo Postal: 3015</a><br />
-           <a href="#">Telefonos: 0251-9921112</a><br />
+					<b style='font-weight:bold; font-size:14px;'><a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/4.0/'><img alt='Licencia de Creative Commons' style='border-width:0' src='img/creative.png' /></a><br />Este obra está bajo una <a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>licencia de Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional</a></b>
                 </p>
    </div>
 </div>

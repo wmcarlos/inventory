@@ -116,6 +116,7 @@ function cargar()
     var availableTags = [
     	<?php  print $lista_prod; ?>
     ]
+    
     $( "#txttext_articulo" ).autocomplete({
       source: availableTags,
       select: function( event , ui ) {

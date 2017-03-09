@@ -93,5 +93,5 @@ function fechahoy(){
 $(document).ready(function(){
 	fechahoy();
 	$("#contenido_pie").empty();
-	$("#contenido_pie").html("<b style='font-weight:bold; font-size:24px;'>Todos los derechos Reservados</b>");
+	$("#contenido_pie").html("<b style='font-weight:bold; font-size:14px;'><a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/4.0/'><img alt='Licencia de Creative Commons' style='border-width:0' src='img/creative.png' /></a><br />Este obra está bajo una <a rel='license' href='http://creativecommons.org/licenses/by-nc-sa/4.0/'>licencia de Creative Commons Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional</a></b>");
 });
